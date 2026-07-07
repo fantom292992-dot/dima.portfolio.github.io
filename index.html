@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta name="description" content="Dima Portfolio: 3D-дизайн, сайты, лендинги, брендинг, моушн и визуальные продуктовые кейсы."/>
+  <meta property="og:title" content="Dima Portfolio"/>
+  <meta property="og:description" content="3D-дизайн, сайты, лендинги, брендинг и визуальные кейсы."/>
+  <meta property="og:type" content="website"/>
+  <meta name="theme-color" content="#080809"/>
+  <title>Dima Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --bg:#080809;
+      --bg2:#0e0e10;
+      --bg3:#141416;
+      --bg4:#1a1a1d;
+      --border:rgba(255,255,255,0.07);
+      --border2:rgba(255,255,255,0.12);
+      --border3:rgba(255,255,255,0.18);
+      --text:#f2f2f4;
+      --text2:#a0a0aa;
+      --text3:#606068;
+      --accent:#c8ff00;
+      --accent-dim:rgba(200,255,0,0.12);
+      --radius:16px;
+      --radius2:24px;
+      --font:'Manrope',sans-serif;
+      --font2:'Inter',sans-serif;
+    }
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:var(--font);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+    ::-webkit-scrollbar{width:3px}
+    ::-webkit-scrollbar-track{background:var(--bg)}
+    ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    section{scroll-margin-top:72px}
+
+    /* ── MARQUEE TICKER ── */
+    .ticker{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--bg2)}
+    .ticker-track{display:flex;align-items:center;padding:14px 0;white-space:nowrap}
+    .ticker-row{display:flex;align-items:center;gap:0;animation:tick 22s linear infinite;flex-shrink:0}
+    .ticker-row.rev{animation-direction:reverse;animation-duration:26s}
+    @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    .ticker-item{display:inline-flex;align-items:center;gap:20px;padding:0 28px;font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);flex-shrink:0}
+    .ticker-item .dot{color:var(--accent);font-size:16px;line-height:1}
+    .ticker+.ticker{border-top:none}
+
+    /* ── NAV ── */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:68px;background:rgba(8,8,9,.82);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid transparent;transition:border-color .3s}
+    .nav.s{border-color:var(--border)}
+    .nav-logo{display:flex;align-items:center;height:32px}
+    .nav-logo img{height:28px;width:auto;filter:brightness(0) invert(1)}
+    .nav-logo-text{font-size:20px;font-weight:800;letter-spacing:-.03em;color:var(--text)}
+    .nav-logo-text span{color:var(--accent)}
+    .nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+    .nav-links a{font-size:13px;font-weight:500;color:var(--text2);transition:color .2s}
+    .nav-links a:hover{color:var(--text)}
+    .nav-right{display:flex;align-items:center;gap:20px}
+    .nav-lang{display:flex;gap:2px}
+    .nav-lang button{background:none;border:none;cursor:pointer;font-size:12px;font-weight:600;color:var(--text3);padding:4px 8px;letter-spacing:.04em;transition:color .2s;font-family:var(--font)}
+    .nav-lang button.active{color:var(--accent)}
+    .nav-cta{display:inline-flex;align-items:center;gap:8px;padding:9px 20px;border:1px solid var(--border2);border-radius:100px;font-size:13px;font-weight:600;color:var(--text);transition:border-color .2s,background .2s}
+    .nav-cta:hover{border-color:var(--border3);background:rgba(255,255,255,.04)}
+    .nav-burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+    .nav-burger span{display:block;width:22px;height:1.5px;background:var(--text);border-radius:2px;transition:.3s}
+
+    /* ── HERO ── */
+    .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:100px 40px 60px;position:relative;overflow:hidden}
+    .hero-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+    .hero-glow{position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(200,255,0,.06) 0%,transparent 70%);top:-100px;left:50%;transform:translateX(-50%)}
+    .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:60px 60px;mask-image:linear-gradient(to bottom,transparent 0%,black 30%,black 70%,transparent 100%)}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:10px;padding:6px 14px;border:1px solid var(--border2);border-radius:100px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text2);margin-bottom:28px;position:relative}
+    .hero-eyebrow-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 2s ease infinite}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+    .hero-h1{font-size:clamp(48px,7vw,104px);font-weight:800;line-height:.95;letter-spacing:-.04em;color:var(--text);margin-bottom:40px;position:relative}
+    .hero-h1 em{font-style:normal;color:var(--accent)}
+    .hero-sub{max-width:440px;font-size:15px;font-weight:400;line-height:1.75;color:var(--text2);margin-bottom:44px;position:relative}
+    .hero-btns{display:flex;align-items:center;gap:14px;flex-wrap:wrap;position:relative}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border-radius:100px;font-family:var(--font);font-size:13px;font-weight:600;letter-spacing:.02em;cursor:pointer;transition:.2s;border:none}
+    .btn-accent{background:var(--accent);color:#000}
+    .btn-accent:hover{background:#b8ef00;transform:translateY(-1px)}
+    .btn-outline{background:transparent;border:1px solid var(--border2);color:var(--text)}
+    .btn-outline:hover{border-color:var(--border3);background:rgba(255,255,255,.04)}
+
+    /* ── SECTION LABELS ── */
+    .sec-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
+    .sec-eyebrow::before{content:'';display:block;width:20px;height:1px;background:var(--accent)}
+    .sec-h2{font-size:clamp(32px,4.5vw,60px);font-weight:800;line-height:1.02;letter-spacing:-.03em;color:var(--text)}
+    .sec-lead{font-size:15px;line-height:1.75;color:var(--text2);max-width:520px}
+
+    /* ── CASES (visual previews, image grid) ── */
+    .cases-section{padding:100px 40px}
+    .cases-intro{margin-bottom:56px}
+    .cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+    .case-card{position:relative;overflow:hidden;border-radius:0;background:var(--bg3);cursor:default}
+    .cases-grid .case-card:first-child{border-radius:var(--radius2) 0 0 0}
+    .cases-grid .case-card:nth-child(3){border-radius:0 var(--radius2) 0 0}
+    .cases-grid .case-card:nth-last-child(1){border-radius:0 0 var(--radius2) 0}
+    .cases-grid .case-card:nth-last-child(2){border-radius:0}
+    .case-card img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .6s ease}
+    .case-card:hover img{transform:scale(1.04)}
+    .case-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,9,.85) 0%,transparent 50%);opacity:0;transition:opacity .35s ease;display:flex;align-items:flex-end;padding:24px}
+    .case-card:hover .case-overlay{opacity:1}
+    .case-name{font-size:15px;font-weight:700;color:var(--text)}
+    .case-desc{font-size:13px;color:var(--text2);margin-top:4px;line-height:1.5}
+
+    /* video cases */
+    .cases-video-row{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin-top:3px}
+    .case-video-card{position:relative;overflow:hidden;background:var(--bg3);border-radius:0}
+    .cases-video-row .case-video-card:first-child{border-radius:0 0 0 var(--radius2)}
+    .cases-video-row .case-video-card:last-child{border-radius:0 0 var(--radius2) 0}
+    .case-video-card video{width:100%;aspect-ratio:16/10;object-fit:cover;display:block}
+    .case-video-card .case-overlay{background:linear-gradient(to top,rgba(8,8,9,.88) 0%,transparent 55%)}
+    .case-video-card:hover .case-overlay{opacity:1}
+
+    /* ── WORK CARDS (live projects) ── */
+    .work-section{padding:0 40px 100px}
+    .work-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px}
+    .work-count{font-size:13px;font-weight:600;color:var(--text3);letter-spacing:.06em}
+    .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+    .work-card{position:relative;overflow:hidden;border-radius:0;background:var(--bg3);display:block}
+    .work-grid .work-card:first-child{border-radius:var(--radius2) 0 0 0}
+    .work-grid .work-card:nth-child(3){border-radius:0 var(--radius2) 0 0}
+    .work-grid .work-card:nth-last-child(1){border-radius:0 0 var(--radius2) 0}
+    .work-grid .work-card:nth-last-child(2){border-radius:0}
+    .work-card-img{width:100%;aspect-ratio:16/10;object-fit:cover;transition:transform .55s ease;display:block}
+    .work-card:hover .work-card-img{transform:scale(1.04)}
+    .work-card-body{padding:20px 22px 22px}
+    .work-card-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+    .work-card-tag{padding:4px 10px;border:1px solid var(--border);border-radius:100px;font-size:11px;font-weight:600;color:var(--text3);letter-spacing:.04em}
+    .work-card-tag.closed{border-color:rgba(255,255,255,.08);color:var(--text3)}
+    .work-card-name{font-size:18px;font-weight:700;letter-spacing:-.02em;color:var(--text);display:flex;align-items:center;gap:6px}
+    .work-card-name .arr{opacity:.5;font-size:14px;transition:.2s}
+    .work-card:hover .work-card-name .arr{opacity:1;transform:translate(2px,-2px)}
+    .work-card-desc{font-size:13px;line-height:1.65;color:var(--text2);margin-top:8px}
+
+    /* ── SLIDER CARD (dashboard screenshots) ── */
+    .slider-wrap{grid-column:1/-1;position:relative;overflow:hidden;border-radius:0;background:var(--bg3)}
+    .slider-track{display:flex;transition:transform .4s ease}
+    .slide{flex:0 0 100%;aspect-ratio:16/8;overflow:hidden}
+    .slide img{width:100%;height:100%;object-fit:cover}
+    .slider-nav{position:absolute;bottom:20px;right:22px;display:flex;align-items:center;gap:10px}
+    .slider-btn{width:36px;height:36px;border-radius:50%;border:1px solid var(--border2);background:rgba(14,14,16,.7);backdrop-filter:blur(8px);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text);font-size:16px;transition:.2s}
+    .slider-btn:hover{border-color:var(--border3);background:rgba(20,20,22,.9)}
+    .slider-body{padding:20px 22px 24px}
+    .slider-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+    .slider-title{font-size:18px;font-weight:700;letter-spacing:-.02em;color:var(--text);margin-bottom:8px}
+    .slider-desc{font-size:13px;line-height:1.65;color:var(--text2)}
+
+    /* ── SERVICES ── */
+    .services-section{padding:100px 40px;background:var(--bg2)}
+    .services-header{margin-bottom:56px}
+    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;border:1px solid var(--border);border-radius:var(--radius2);overflow:hidden}
+    .service-item{padding:36px 32px;background:var(--bg3);transition:background .25s;position:relative}
+    .service-item:hover{background:var(--bg4)}
+    .service-item h3{font-size:17px;font-weight:700;letter-spacing:-.02em;color:var(--text);margin-bottom:10px}
+    .service-item p{font-size:13px;line-height:1.7;color:var(--text2)}
+    .service-price{font-size:12px;font-weight:700;color:var(--accent);margin-top:18px;letter-spacing:.02em}
+    .service-cta{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:12px;font-weight:600;color:var(--text2);transition:color .2s}
+    .service-cta:hover{color:var(--accent)}
+
+    /* ── PROCESS ── */
+    .process-section{padding:100px 40px}
+    .process-top{display:flex;align-items:flex-end;justify-content:space-between;gap:40px;margin-bottom:56px}
+    .process-pills{display:flex;flex-wrap:wrap;gap:8px;max-width:480px}
+    .process-pill{padding:7px 16px;border:1px solid var(--border);border-radius:100px;font-size:12px;font-weight:600;color:var(--text3);letter-spacing:.04em}
+    .process-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;border:1px solid var(--border);border-radius:var(--radius2);overflow:hidden}
+    .process-step{padding:40px 36px;background:var(--bg3)}
+    .process-step-num{font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--text3);margin-bottom:28px}
+    .process-step h3{font-size:18px;font-weight:700;letter-spacing:-.02em;color:var(--text);margin-bottom:12px}
+    .process-step p{font-size:13px;line-height:1.7;color:var(--text2)}
+    .process-desc{max-width:580px;margin:48px auto 0;text-align:center;font-size:14px;line-height:1.75;color:var(--text2)}
+
+    /* ── FAQ ── */
+    .faq-section{padding:100px 40px;background:var(--bg2)}
+    .faq-wrap{max-width:760px;margin:56px auto 0}
+    .faq-item{border-top:1px solid var(--border)}
+    .faq-item:last-child{border-bottom:1px solid var(--border)}
+    .faq-q{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:24px 0;cursor:pointer;font-size:15px;font-weight:600;color:var(--text);user-select:none;transition:color .2s}
+    .faq-q:hover{color:var(--accent)}
+    .faq-toggle{width:32px;height:32px;flex-shrink:0;border:1px solid var(--border2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--text2);transition:.3s}
+    .faq-item.open .faq-toggle{transform:rotate(45deg);border-color:var(--accent);color:var(--accent)}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease}
+    .faq-item.open .faq-a{max-height:300px}
+    .faq-a p{padding-bottom:24px;font-size:14px;line-height:1.8;color:var(--text2)}
+
+    /* ── AGENCY ── */
+    .agency-section{padding:100px 40px;border-top:1px solid var(--border)}
+    .agency-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;border:1px solid var(--border);border-radius:var(--radius2);padding:56px}
+    .agency-left h2{font-size:clamp(32px,4vw,52px);font-weight:800;letter-spacing:-.03em;color:var(--text);line-height:1.05;margin-bottom:20px}
+    .agency-left p{font-size:14px;line-height:1.75;color:var(--text2);margin-bottom:28px}
+    .agency-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px}
+    .agency-pill{padding:6px 14px;border:1px solid var(--border);border-radius:100px;font-size:12px;font-weight:600;color:var(--text3)}
+    .agency-btns{display:flex;gap:12px;flex-wrap:wrap}
+    .agency-meta{display:flex;flex-direction:column;gap:24px;padding-top:8px}
+    .agency-meta-row{padding:20px 0;border-top:1px solid var(--border)}
+    .agency-meta-row:last-child{border-bottom:1px solid var(--border)}
+    .agency-meta-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:6px}
+    .agency-meta-val{font-size:14px;font-weight:600;color:var(--text)}
+
+    /* ── FOOTER ── */
+    footer{padding:32px 40px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .footer-logo{font-size:18px;font-weight:800;letter-spacing:-.03em;color:var(--text)}
+    .footer-logo span{color:var(--accent)}
+    .footer-copy{font-size:12px;color:var(--text3)}
+    .footer-links{display:flex;gap:24px;list-style:none}
+    .footer-links a{font-size:12px;color:var(--text3);transition:color .2s}
+    .footer-links a:hover{color:var(--text)}
+
+    /* ── REVEAL ── */
+    .r{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+    .r.v{opacity:1;transform:translateY(0)}
+    .rd1{transition-delay:.08s}.rd2{transition-delay:.16s}.rd3{transition-delay:.24s}.rd4{transition-delay:.32s}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:1024px){
+      .cases-grid,.work-grid{grid-template-columns:1fr 1fr}
+      .cases-grid .case-card:first-child{border-radius:var(--radius2) 0 0 0}
+      .cases-grid .case-card:nth-child(2){border-radius:0 var(--radius2) 0 0}
+      .services-grid,.process-steps{grid-template-columns:1fr 1fr}
+      .agency-inner{grid-template-columns:1fr}
+    }
+    @media(max-width:768px){
+      .nav{padding:0 20px;height:60px}
+      .nav-links,.nav-right{display:none}
+      .nav-burger{display:flex}
+      .hero{padding:80px 20px 48px}
+      .cases-section,.work-section,.services-section,.process-section,.faq-section,.agency-section{padding:72px 20px}
+      .work-section{padding-left:20px;padding-right:20px}
+      .cases-grid,.work-grid{grid-template-columns:1fr}
+      .cases-grid .case-card:first-child,.cases-grid .case-card:nth-child(2),
+      .cases-grid .case-card:nth-child(3),.cases-grid .case-card:nth-last-child(1),
+      .cases-grid .case-card:nth-last-child(2){border-radius:0}
+      .cases-grid .case-card:first-child{border-radius:var(--radius2) var(--radius2) 0 0}
+      .cases-video-row{grid-template-columns:1fr}
+      .cases-video-row .case-video-card:first-child,.cases-video-row .case-video-card:last-child{border-radius:0}
+      .work-grid .work-card:first-child,.work-grid .work-card:nth-child(3),
+      .work-grid .work-card:nth-last-child(1),.work-grid .work-card:nth-last-child(2){border-radius:0}
+      .work-grid .work-card:first-child{border-radius:var(--radius2) var(--radius2) 0 0}
+      .services-grid{grid-template-columns:1fr}
+      .process-steps{grid-template-columns:1fr}
+      .process-top{flex-direction:column;align-items:flex-start}
+      .agency-inner{padding:32px 24px}
+      .work-header,.cases-intro{flex-direction:column;align-items:flex-start;gap:16px}
+      footer{flex-direction:column;align-items:center;text-align:center}
+    }
+    @media(prefers-reduced-motion:reduce){
+      .r{transition:none;opacity:1;transform:none}
+      .ticker-row{animation:none}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="#top" class="nav-logo">
+    <span class="nav-logo-text">dima<span>.</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="https://t.me/fantikycrep" target="_blank">Кейсы</a></li>
+    <li><a href="https://t.me/fantikycrep" target="_blank">Работы</a></li>
+    <li><a href="#services">Услуги</a></li>
+    <li><a href="#process">Процесс</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="https://t.me/BingX_cash" target="_blank" class="nav-cta">Контакты</a>
+  </div>
+  <button class="nav-burger" id="burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- TICKER 1 -->
+<div class="ticker" style="margin-top:68px">
+  <div class="ticker-track">
+    <div class="ticker-row">
+      <div class="ticker-item"><span class="dot">✦</span>3D Design</div>
+      <div class="ticker-item"><span class="dot">✦</span>Web Design</div>
+      <div class="ticker-item"><span class="dot">✦</span>Branding</div>
+      <div class="ticker-item"><span class="dot">✦</span>Motion</div>
+      <div class="ticker-item"><span class="dot">✦</span>3D Modeling</div>
+      <div class="ticker-item"><span class="dot">✦</span>Rendering</div>
+      <div class="ticker-item"><span class="dot">✦</span>UI/UX</div>
+      <div class="ticker-item"><span class="dot">✦</span>Landing Pages</div>
+      <div class="ticker-item"><span class="dot">✦</span>3D Design</div>
+      <div class="ticker-item"><span class="dot">✦</span>Web Design</div>
+      <div class="ticker-item"><span class="dot">✦</span>Branding</div>
+      <div class="ticker-item"><span class="dot">✦</span>Motion</div>
+      <div class="ticker-item"><span class="dot">✦</span>3D Modeling</div>
+      <div class="ticker-item"><span class="dot">✦</span>Rendering</div>
+      <div class="ticker-item"><span class="dot">✦</span>UI/UX</div>
+      <div class="ticker-item"><span class="dot">✦</span>Landing Pages</div>
+    </div>
+    <div class="ticker-row" aria-hidden="true">
+      <div class="ticker-item"><span class="dot">✦</span>3D Design</div>
+      <div class="ticker-item"><span class="dot">✦</span>Web Design</div>
+      <div class="ticker-item"><span class="dot">✦</span>Branding</div>
+      <div class="ticker-item"><span class="dot">✦</span>Motion</div>
+      <div class="ticker-item"><span class="dot">✦</span>3D Modeling</div>
+      <div class="ticker-item"><span class="dot">✦</span>Rendering</div>
+      <div class="ticker-item"><span class="dot">✦</span>UI/UX</div>
+      <div class="ticker-item"><span class="dot">✦</span>Landing Pages</div>
+      <div class="ticker-item"><span class="dot">✦</span>3D Design</div>
+      <div class="ticker-item"><span class="dot">✦</span>Web Design</div>
+      <div class="ticker-item"><span class="dot">✦</span>Branding</div>
+      <div class="ticker-item"><span class="dot">✦</span>Motion</div>
+      <div class="ticker-item"><span class="dot">✦</span>3D Modeling</div>
+      <div class="ticker-item"><span class="dot">✦</span>Rendering</div>
+      <div class="ticker-item"><span class="dot">✦</span>UI/UX</div>
+      <div class="ticker-item"><span class="dot">✦</span>Landing Pages</div>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <div class="hero-glow"></div>
+    <div class="hero-grid"></div>
+  </div>
+  <div class="hero-eyebrow r">
+    <span class="hero-eyebrow-dot"></span>
+    Открыт к заказам · Available for projects
+  </div>
+  <h1 class="hero-h1 r rd1">
+    Создаю сайты,<br/>
+    3D и <em>брендинг</em>
+  </h1>
+  <p class="hero-sub r rd2">
+    От идеи до рабочей версии: 3D-визуализации, лендинги, фирменный стиль и моушн-дизайн. Быстро, чисто, без лишнего шума.
+  </p>
+  <div class="hero-btns r rd3">
+    <a href="#work" class="btn btn-accent">Смотреть работы</a>
+    <a href="#process" class="btn btn-outline">Как работаю</a>
+  </div>
+</section>
+
+<!-- TICKER 2 -->
+<div class="ticker">
+  <div class="ticker-track">
+    <div class="ticker-row rev">
+      <div class="ticker-item"><span class="dot">✦</span>Лендинги</div>
+      <div class="ticker-item"><span class="dot">✦</span>3D рендеры</div>
+      <div class="ticker-item"><span class="dot">✦</span>Фирменный стиль</div>
+      <div class="ticker-item"><span class="dot">✦</span>Анимации</div>
+      <div class="ticker-item"><span class="dot">✦</span>Веб-дизайн</div>
+      <div class="ticker-item"><span class="dot">✦</span>Моушн</div>
+      <div class="ticker-item"><span class="dot">✦</span>UI/UX</div>
+      <div class="ticker-item"><span class="dot">✦</span>Упаковка</div>
+      <div class="ticker-item"><span class="dot">✦</span>Лендинги</div>
+      <div class="ticker-item"><span class="dot">✦</span>3D рендеры</div>
+      <div class="ticker-item"><span class="dot">✦</span>Фирменный стиль</div>
+      <div class="ticker-item"><span class="dot">✦</span>Анимации</div>
+      <div class="ticker-item"><span class="dot">✦</span>Веб-дизайн</div>
+      <div class="ticker-item"><span class="dot">✦</span>Моушн</div>
+      <div class="ticker-item"><span class="dot">✦</span>UI/UX</div>
+      <div class="ticker-item"><span class="dot">✦</span>Упаковка</div>
+    </div>
+    <div class="ticker-row rev" aria-hidden="true">
+      <div class="ticker-item"><span class="dot">✦</span>Лендинги</div>
+      <div class="ticker-item"><span class="dot">✦</span>3D рендеры</div>
+      <div class="ticker-item"><span class="dot">✦</span>Фирменный стиль</div>
+      <div class="ticker-item"><span class="dot">✦</span>Анимации</div>
+      <div class="ticker-item"><span class="dot">✦</span>Веб-дизайн</div>
+      <div class="ticker-item"><span class="dot">✦</span>Моушн</div>
+      <div class="ticker-item"><span class="dot">✦</span>UI/UX</div>
+      <div class="ticker-item"><span class="dot">✦</span>Упаковка</div>
+      <div class="ticker-item"><span class="dot">✦</span>Лендинги</div>
+      <div class="ticker-item"><span class="dot">✦</span>3D рендеры</div>
+      <div class="ticker-item"><span class="dot">✦</span>Фирменный стиль</div>
+      <div class="ticker-item"><span class="dot">✦</span>Анимации</div>
+      <div class="ticker-item"><span class="dot">✦</span>Веб-дизайн</div>
+      <div class="ticker-item"><span class="dot">✦</span>Моушн</div>
+      <div class="ticker-item"><span class="dot">✦</span>UI/UX</div>
+      <div class="ticker-item"><span class="dot">✦</span>Упаковка</div>
+    </div>
+  </div>
+</div>
+
+<!-- VISUAL CASES -->
+<section class="cases-section" id="cases">
+  <div class="cases-intro r">
+    <div class="sec-eyebrow">Кейсы и визуальные запуски</div>
+    <h2 class="sec-h2">Подборка 3D-сцен и лендингов</h2>
+    <p class="sec-lead" style="margin-top:14px">Крупный объект, понятная композиция и быстрый первый эффект — как это должно работать.</p>
+  </div>
+
+  <!-- Image grid — same 3-col structure as Belov -->
+  <div class="cases-grid r">
+    <div class="case-card">
+      <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&q=80&auto=format&fit=crop" alt="Watch 3D product scene" loading="lazy"/>
+      <div class="case-overlay">
+        <div>
+          <div class="case-name">Apple Watch Ultra</div>
+          <div class="case-desc">Тёмная продуктовая сцена, технологичная подача и металл.</div>
+        </div>
+      </div>
+    </div>
+    <div class="case-card">
+      <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80&auto=format&fit=crop" alt="Nike sneaker product scene" loading="lazy"/>
+      <div class="case-overlay">
+        <div>
+          <div class="case-name">Nike Air Force</div>
+          <div class="case-desc">Яркий первый экран, крупная предметная 3D-сцена.</div>
+        </div>
+      </div>
+    </div>
+    <div class="case-card">
+      <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=800&q=80&auto=format&fit=crop" alt="Perfume product 3D render" loading="lazy"/>
+      <div class="case-overlay">
+        <div>
+          <div class="case-name">Noir Parfum</div>
+          <div class="case-desc">Промо-экран парфюма: глубокий фон и плотная сцена.</div>
+        </div>
+      </div>
+    </div>
+    <div class="case-card">
+      <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80&auto=format&fit=crop" alt="Airpods 3D product render" loading="lazy"/>
+      <div class="case-overlay">
+        <div>
+          <div class="case-name">AirPods Pro</div>
+          <div class="case-desc">Светлая продуктовая сцена, чистая сетка, спокойная подача.</div>
+        </div>
+      </div>
+    </div>
+    <div class="case-card">
+      <img src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=800&q=80&auto=format&fit=crop" alt="Sport shoes 3D render" loading="lazy"/>
+      <div class="case-overlay">
+        <div>
+          <div class="case-name">Adidas Ultraboost</div>
+          <div class="case-desc">Спортивная подача, мягкий интерфейс, энергия движения.</div>
+        </div>
+      </div>
+    </div>
+    <div class="case-card">
+      <img src="https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=800&q=80&auto=format&fit=crop" alt="Headphones product scene" loading="lazy"/>
+      <div class="case-overlay">
+        <div>
+          <div class="case-name">Sony WH-1000XM5</div>
+          <div class="case-desc">Тёмный промо-лендинг, фокус на материал и форму.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Video / animation cases row -->
+  <div class="cases-video-row r rd2">
+    <div class="case-video-card">
+      <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80&auto=format&fit=crop" alt="Brand motion design" loading="lazy" style="width:100%;aspect-ratio:16/10;object-fit:cover"/>
+      <div class="case-overlay">
+        <div>
+          <div class="case-name">Brand Motion — Nexora</div>
+          <div class="case-desc">Бренд-анимация: ритм, контраст и энергия без лишнего текста.</div>
+        </div>
+      </div>
+    </div>
+    <div class="case-video-card">
+      <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80&auto=format&fit=crop" alt="3D animation render" loading="lazy" style="width:100%;aspect-ratio:16/10;object-fit:cover"/>
+      <div class="case-overlay">
+        <div>
+          <div class="case-name">3D Loop — Aether</div>
+          <div class="case-desc">3D-анимация: плавное движение, чистый свет, акцент на форму.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK (live projects) -->
+<section class="work-section" id="work">
+  <div class="work-header r">
+    <div>
+      <div class="sec-eyebrow">Работы</div>
+      <h2 class="sec-h2">Работы в портфолио</h2>
+    </div>
+    <div class="work-count">05 Проектов</div>
+  </div>
+
+  <div class="work-grid">
+    <!-- Card 1 -->
+    <a href="https://t.me/fantikycrep" target="_blank" class="work-card r">
+      <img class="work-card-img" src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80&auto=format&fit=crop" alt="Lumora Studio landing preview" loading="lazy"/>
+      <div class="work-card-body">
+        <div class="work-card-tags">
+          <span class="work-card-tag">Сайт</span>
+          <span class="work-card-tag">Дизайн</span>
+          <span class="work-card-tag">Анимация</span>
+        </div>
+        <div class="work-card-name">Lumora Studio <span class="arr">↗</span></div>
+        <div class="work-card-desc">Лендинг с мягкими анимациями, прозрачными слоями и аккуратной коммерческой подачей.</div>
+      </div>
+    </a>
+
+    <!-- Card 2 -->
+    <a href="https://t.me/fantikycrep" target="_blank" class="work-card r rd1">
+      <img class="work-card-img" src="https://images.unsplash.com/photo-1534670007418-fbb7f6cf32c3?w=800&q=80&auto=format&fit=crop" alt="3D cinematic landing preview" loading="lazy"/>
+      <div class="work-card-body">
+        <div class="work-card-tags">
+          <span class="work-card-tag">Лендинг</span>
+          <span class="work-card-tag">3D-сцена</span>
+        </div>
+        <div class="work-card-name">Laocoön ↗ <span class="arr">↗</span></div>
+        <div class="work-card-desc">Кинематографичный тёмный лендинг с крупной типографикой и 3D-материалом.</div>
+      </div>
+    </a>
+
+    <!-- Card 3 -->
+    <a href="https://t.me/fantikycrep" target="_blank" class="work-card r rd2">
+      <img class="work-card-img" src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&q=80&auto=format&fit=crop" alt="Minimal product landing" loading="lazy"/>
+      <div class="work-card-body">
+        <div class="work-card-tags">
+          <span class="work-card-tag">Лендинг</span>
+          <span class="work-card-tag">Брендинг</span>
+        </div>
+        <div class="work-card-name">Solaris Digital <span class="arr">↗</span></div>
+        <div class="work-card-desc">Минималистичный продуктовый экран с видео-фоном и плотным бренд-сигналом.</div>
+      </div>
+    </a>
+
+    <!-- Slider card (dashboard / multi-screen project) -->
+    <div class="work-card slider-wrap r" style="grid-column:1/-1">
+      <div class="slider-track" id="sliderTrack">
+        <div class="slide"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=80&auto=format&fit=crop" alt="Dashboard screen 1" loading="lazy"/></div>
+        <div class="slide"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1400&q=80&auto=format&fit=crop" alt="Dashboard screen 2" loading="lazy"/></div>
+        <div class="slide"><img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=1400&q=80&auto=format&fit=crop" alt="Dashboard screen 3" loading="lazy"/></div>
+        <div class="slide"><img src="https://images.unsplash.com/photo-1543286386-713bdd548da4?w=1400&q=80&auto=format&fit=crop" alt="Dashboard screen 4" loading="lazy"/></div>
+      </div>
+      <div class="slider-nav">
+        <button class="slider-btn" id="sliderPrev">‹</button>
+        <button class="slider-btn" id="sliderNext">›</button>
+      </div>
+      <div class="slider-body">
+        <div class="slider-tags">
+          <span class="work-card-tag">UI/UX</span>
+          <span class="work-card-tag">Dashboard</span>
+          <span class="work-card-tag">Веб-приложение</span>
+        </div>
+        <div class="slider-title">AnalyticsPro Dashboard</div>
+        <div class="slider-desc">Дашборд для аналитики: метрики, графики, отчёты и экспорт данных. Дизайн-система с нуля, тёмная тема, адаптив.</div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <a href="https://t.me/fantikycrep" target="_blank" class="work-card r">
+      <img class="work-card-img" src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&q=80&auto=format&fit=crop" alt="Branding identity project" loading="lazy"/>
+      <div class="work-card-body">
+        <div class="work-card-tags">
+          <span class="work-card-tag">Брендинг</span>
+          <span class="work-card-tag">Закрытый кейс</span>
+        </div>
+        <div class="work-card-name">Aura Brand Identity</div>
+        <div class="work-card-desc">Фирменный стиль для стартапа: логотип, цветовая система, шрифты, гайдлайн.</div>
+      </div>
+    </a>
+
+    <!-- Card 5 -->
+    <a href="https://t.me/fantikycrep" target="_blank" class="work-card r rd1">
+      <img class="work-card-img" src="https://images.unsplash.com/photo-1614854262318-831574f15f1f?w=800&q=80&auto=format&fit=crop" alt="Cosmos cinematic landing" loading="lazy"/>
+      <div class="work-card-body">
+        <div class="work-card-tags">
+          <span class="work-card-tag">Сайт</span>
+          <span class="work-card-tag">Моушн</span>
+        </div>
+        <div class="work-card-name">Cosmos Landing <span class="arr">↗</span></div>
+        <div class="work-card-desc">Иммерсивный лендинг: тёмная сцена, видео-фон, крупная типографика.</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div class="services-header r">
+    <div class="sec-eyebrow">Услуги</div>
+    <h2 class="sec-h2">Что можно заказать</h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-item r">
+      <h3>Сайты</h3>
+      <p>Корпоративный сайт, портфолио или сервисная страница с понятной структурой, адаптивом и формой заявки.</p>
+      <div class="service-price">от $99</div>
+      <a href="https://t.me/BingX_cash" target="_blank" class="service-cta">Написать →</a>
+    </div>
+    <div class="service-item r rd1">
+      <h3>Лендинги</h3>
+      <p>Одностраничный запуск под рекламу, заявки, презентацию продукта или быстрый тест спроса.</p>
+      <div class="service-price">от $49</div>
+      <a href="https://t.me/BingX_cash" target="_blank" class="service-cta">Написать →</a>
+    </div>
+    <div class="service-item r rd2">
+      <h3>3D Моделирование</h3>
+      <p>Детальные 3D-модели и фотореалистичные рендеры для продуктов, персонажей и сред. Blender, Cinema 4D.</p>
+      <div class="service-price">от $65</div>
+      <a href="https://t.me/BingX_cash" target="_blank" class="service-cta">Написать →</a>
+    </div>
+    <div class="service-item r">
+      <h3>Брендинг</h3>
+      <p>Логотип, фирменный стиль, цветовая система и шрифты. Полный визуальный язык бренда под ключ.</p>
+      <div class="service-price">от $79</div>
+      <a href="https://t.me/BingX_cash" target="_blank" class="service-cta">Написать →</a>
+    </div>
+    <div class="service-item r rd1">
+      <h3>Моушн-дизайн</h3>
+      <p>Анимации и моушн-графика для соцсетей, рекламы и брендинга. Контент, который движется с намерением.</p>
+      <div class="service-price">от $45</div>
+      <a href="https://t.me/BingX_cash" target="_blank" class="service-cta">Написать →</a>
+    </div>
+    <div class="service-item r rd2">
+      <h3>UI/UX Дизайн</h3>
+      <p>Концепты, интерфейсы, UI-kit, дизайн-системы, прототипы и аккуратные макеты для разработки. Figma.</p>
+      <div class="service-price">от $59</div>
+      <a href="https://t.me/BingX_cash" target="_blank" class="service-cta">Написать →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section" id="process">
+  <div class="process-top">
+    <div class="r">
+      <div class="sec-eyebrow">Процесс</div>
+      <h2 class="sec-h2">Быстрый запуск<br/>без бюрократии</h2>
+    </div>
+    <div class="process-pills r rd1">
+      <span class="process-pill">3D-дизайн</span>
+      <span class="process-pill">Лендинги</span>
+      <span class="process-pill">Брендинг</span>
+      <span class="process-pill">Сайты</span>
+      <span class="process-pill">Моушн</span>
+      <span class="process-pill">UI/UX</span>
+    </div>
+  </div>
+  <div class="process-steps">
+    <div class="process-step r">
+      <div class="process-step-num">01</div>
+      <h3>Согласование</h3>
+      <p>Фиксируем цель, сценарии, сроки и формат продукта. Быстро превращаем идею в понятную структуру работ.</p>
+    </div>
+    <div class="process-step r rd1">
+      <div class="process-step-num">02</div>
+      <h3>Разработка</h3>
+      <p>Собираем рабочую версию в быстрые сроки: сайт, 3D-визуализацию, анимацию, бренд-систему или дизайн-макет.</p>
+    </div>
+    <div class="process-step r rd2">
+      <div class="process-step-num">03</div>
+      <h3>Правки и запуск</h3>
+      <p>Показываем результат, вносим правки, полируем до состояния запуска. Исходники и сопровождение включены.</p>
+    </div>
+  </div>
+  <p class="process-desc r">Разрабатываю сайты, лендинги, 3D-визуализации, брендинг, моушн и UI/UX. Берусь за задачу, собираю рабочую версию и довожу проект до финала без лишнего шума.</p>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div style="text-align:center" class="r">
+    <div class="sec-eyebrow" style="justify-content:center">FAQ</div>
+    <h2 class="sec-h2">Кратко по базовым вопросам</h2>
+  </div>
+  <div class="faq-wrap">
+    <div class="faq-item r">
+      <div class="faq-q">Какие сроки? <span class="faq-toggle">+</span></div>
+      <div class="faq-a"><p>Лендинг — 5–10 дней, 3D-рендер — 3–7 дней, брендинг — 1–2 недели, сайт — 7–14 дней. После брифа сразу фиксируем сроки и этапы.</p></div>
+    </div>
+    <div class="faq-item r rd1">
+      <div class="faq-q">С какими странами работаете? <span class="faq-toggle">+</span></div>
+      <div class="faq-a"><p>Работаю с клиентами из любой страны. Коммуникация на русском и английском. Часовые пояса не проблема — всегда на связи.</p></div>
+    </div>
+    <div class="faq-item r rd2">
+      <div class="faq-q">Как проходит оплата? <span class="faq-toggle">+</span></div>
+      <div class="faq-a"><p>Работа начинается после предоплаты 20%. Принимаю оплату в USDT, через карту или другие удобные способы. Остаток — после сдачи проекта.</p></div>
+    </div>
+    <div class="faq-item r rd3">
+      <div class="faq-q">Как работают корректировки? <span class="faq-toggle">+</span></div>
+      <div class="faq-a"><p>Корректировки включены в стоимость. Собираем список правок, приоритезируем и вносим до согласованного результата. Мелкие правки в процессе — всегда бесплатно.</p></div>
+    </div>
+    <div class="faq-item r rd4">
+      <div class="faq-q">Как начать работу? <span class="faq-toggle">+</span></div>
+      <div class="faq-a"><p>Напишите в Telegram: <a href="https://t.me/BingX_cash" target="_blank" style="color:var(--accent)">@BingX_cash</a>. Расскажите задачу — отвечу быстро и предложу решение.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENCY / ABOUT -->
+<section class="agency-section" id="agency">
+  <div class="agency-inner r">
+    <div class="agency-left">
+      <div class="sec-eyebrow">О себе</div>
+      <h2>Dima —<br/>3D дизайнер<br/>и веб-мейкер</h2>
+      <p>Создаю визуальные продукты для бизнеса и личных брендов: сайты, 3D-визуализации, брендинг, моушн и UI. Быстрая коммуникация, предсказуемый процесс и результат, который хочется показывать.</p>
+      <div class="agency-pills">
+        <span class="agency-pill">3D Design</span>
+        <span class="agency-pill">Web</span>
+        <span class="agency-pill">Motion</span>
+        <span class="agency-pill">Branding</span>
+        <span class="agency-pill">UI/UX</span>
+      </div>
+      <div class="agency-btns">
+        <a href="https://t.me/BingX_cash" target="_blank" class="btn btn-accent">Написать в Telegram</a>
+        <a href="https://t.me/fantikycrep" target="_blank" class="btn btn-outline">Смотреть работы</a>
+      </div>
+    </div>
+    <div class="agency-meta">
+      <div class="agency-meta-row">
+        <div class="agency-meta-label">Фокус</div>
+        <div class="agency-meta-val">Визуальный продукт под задачу</div>
+      </div>
+      <div class="agency-meta-row">
+        <div class="agency-meta-label">Форматы</div>
+        <div class="agency-meta-val">3D, Web, Motion, Brand</div>
+      </div>
+      <div class="agency-meta-row">
+        <div class="agency-meta-label">Процесс</div>
+        <div class="agency-meta-val">Бриф → версия → правки → запуск</div>
+      </div>
+      <div class="agency-meta-row">
+        <div class="agency-meta-label">Контакт</div>
+        <div class="agency-meta-val"><a href="https://t.me/BingX_cash" target="_blank" style="color:var(--accent)">@BingX_cash</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#top" class="footer-logo">dima<span>.</span></a>
+  <p class="footer-copy">© 2025 Dima Portfolio.</p>
+  <ul class="footer-links">
+    <li><a href="https://t.me/fantikycrep" target="_blank">Кейсы</a></li>
+    <li><a href="https://t.me/fantikycrep" target="_blank">Работы</a></li>
+    <li><a href="#services">Услуги</a></li>
+    <li><a href="https://t.me/BingX_cash" target="_blank">Telegram</a></li>
+  </ul>
+</footer>
+
+<script>
+// NAV scroll
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('s',scrollY>30)},{passive:true});
+
+// REVEAL
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');obs.unobserve(e.target)}});
+},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+document.querySelectorAll('.r').forEach(el=>{
+  const r=el.getBoundingClientRect();
+  if(r.top<window.innerHeight)el.classList.add('v');
+  else obs.observe(el);
+});
+
+// SLIDER
+let cur=0;
+const track=document.getElementById('sliderTrack');
+const slides=track?track.querySelectorAll('.slide'):[];
+function goSlide(n){
+  cur=(n+slides.length)%slides.length;
+  track.style.transform=`translateX(-${cur*100}%)`;
+}
+document.getElementById('sliderPrev')?.addEventListener('click',()=>goSlide(cur-1));
+document.getElementById('sliderNext')?.addEventListener('click',()=>goSlide(cur+1));
+
+// FAQ
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const item=q.parentElement;
+    const wasOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!wasOpen)item.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>
